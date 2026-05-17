@@ -1,14 +1,115 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-      if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        window.location.href = "whatsapp://chat?code=FZjqP5vs1YE0pdQgAY6VBL";
-      } else {
-        window.location.href = "https://chat.whatsapp.com/FZjqP5vs1YE0pdQgAY6VBL";
-      }
-    </script>
-  </head>
-  <body></body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LudoClub Venezuela – Únete al grupo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, sans-serif;
+      background: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 24px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .wa-icon {
+      width: 64px; height: 64px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 32px;
+    }
+    h1 { font-size: 20px; font-weight: 600; margin-bottom: 8px; color: #111; }
+    p { font-size: 14px; color: #666; line-height: 1.5; margin-bottom: 20px; }
+    .warning {
+      background: #fff8e1;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #7a5800;
+      text-align: left;
+      margin-bottom: 20px;
+      display: none;
+    }
+    .btn-main {
+      display: block;
+      background: #25D366;
+      color: white;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-bottom: 12px;
+    }
+    .btn-copy {
+      display: block;
+      background: transparent;
+      color: #555;
+      border-radius: 12px;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      width: 100%;
+    }
+    .copied { color: #25D366; font-size: 13px; margin-top: 8px; display: none; }
+    .note { font-size: 11px; color: #aaa; margin-top: 16px; }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="wa-icon">📲</div>
+  <h1>Únete a LudoClub</h1>
+  <p>Presiona el botón para abrir WhatsApp y unirte a nuestra comunidad.</p>
+
+  <div class="warning" id="fb-warning">
+    ⚠️ Estás en el navegador de Facebook. Si el botón no funciona, toca los <strong>3 puntos (⋯)</strong> arriba y elige <strong>"Abrir en navegador externo"</strong>.
+  </div>
+
+  <a class="btn-main" id="wa-btn" href="https://chat.whatsapp.com/FZjqP5vs1YE0pdQgAY6VBL?mode=gi_t">
+    Abrir WhatsApp y unirme
+  </a>
+
+  <button class="btn-copy" onclick="copyLink()">📋 Copiar enlace del grupo</button>
+  <p class="copied" id="copied-msg">✅ ¡Enlace copiado!</p>
+  <p class="note">Al unirte aceptas las normas del grupo.</p>
+</div>
+
+<script>
+  const WA_LINK = "https://chat.whatsapp.com/FZjqP5vs1YE0pdQgAY6VBL?mode=gi_t";
+
+  const ua = navigator.userAgent || "";
+  const isFB = ua.includes("FBAN") || ua.includes("FBAV") || ua.includes("FB_IAB");
+
+  if (isFB) {
+    document.getElementById("fb-warning").style.display = "block";
+    document.getElementById("wa-btn").href = "#";
+    document.getElementById("wa-btn").onclick = function(e) {
+      e.preventDefault();
+      alert("Para unirte al grupo:\n\n1. Toca los 3 puntos ⋯ arriba\n2. Elige 'Abrir en navegador'\n3. Luego toca el botón de WhatsApp");
+    };
+  }
+
+  function copyLink() {
+    navigator.clipboard.writeText(WA_LINK).then(() => {
+      document.getElementById("copied-msg").style.display = "block";
+      setTimeout(() => document.getElementById("copied-msg").style.display = "none", 3000);
+    });
+  }
+</script>
+</body>
 </html>
