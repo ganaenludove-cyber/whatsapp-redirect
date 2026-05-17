@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:url" content="https://ludoclubve.lat">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Únete a LudoClub Venezuela">
+  <meta property="og:description" content="Toca el botón para unirte a nuestro grupo de WhatsApp">
   <title>LudoClub Venezuela – Únete al grupo</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -75,25 +79,21 @@
   <div class="wa-icon">📲</div>
   <h1>Únete a LudoClub</h1>
   <p>Presiona el botón para abrir WhatsApp y unirte a nuestra comunidad.</p>
-
   <div class="warning" id="fb-warning">
     ⚠️ Estás en el navegador de Facebook. Si el botón no funciona, toca los <strong>3 puntos (⋯)</strong> arriba y elige <strong>"Abrir en navegador externo"</strong>.
   </div>
-
   <a class="btn-main" id="wa-btn" href="https://chat.whatsapp.com/FZjqP5vs1YE0pdQgAY6VBL?mode=gi_t">
     Abrir WhatsApp y unirme
   </a>
-
   <button class="btn-copy" onclick="copyLink()">📋 Copiar enlace del grupo</button>
   <p class="copied" id="copied-msg">✅ ¡Enlace copiado!</p>
   <p class="note">Al unirte aceptas las normas del grupo.</p>
 </div>
-
 <script>
   const WA_LINK = "https://chat.whatsapp.com/FZjqP5vs1YE0pdQgAY6VBL?mode=gi_t";
-
   const ua = navigator.userAgent || "";
-  const isFB = ua.includes("FBAN") || ua.includes("FBAV") || ua.includes("FB_IAB");
+  const isFB = ua.includes("FBAN") || ua.includes("FBAV") || ua.includes("FB_IAB") || ua.includes("Facebook");
+  const isIG = ua.includes("Instagram");
 
   if (isFB) {
     document.getElementById("fb-warning").style.display = "block";
@@ -102,6 +102,8 @@
       e.preventDefault();
       alert("Para unirte al grupo:\n\n1. Toca los 3 puntos ⋯ arriba\n2. Elige 'Abrir en navegador'\n3. Luego toca el botón de WhatsApp");
     };
+  } else {
+    window.location.href = WA_LINK;
   }
 
   function copyLink() {
